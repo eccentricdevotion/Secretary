@@ -1,0 +1,86 @@
+author: eccentric_nz
+database: false
+description: Add reminders and todos using a villager masquerading as a secretary.
+main: me.eccentric_nz.plugins.secretary.Secretary
+name: Secretary
+startup: postworld
+dev-url: http://dev.bukkit.org/server-mods/secretary/
+url: http://www.thenosefairy.co.nz/
+version: '1.0'
+permissions:
+  secretary.admin:
+    description: Allow players access to the Secretary admin commands.
+    default: op
+  secretary.*:
+    description: Allow players to create & delete a secretary, add todo items and set reminders.
+    children:
+      secretary.create: true
+      secretary.delete: true
+      secretary.todo: true
+      secretary.remind: true
+      secretary.list: true
+      secretary.sound: true
+      secretary.name: true
+    default: op
+  secretary.create:
+    description: Allow players to create a secretary.
+    default: op
+  secretary.delete:
+    description: Allow players to delete a secretary.
+    default: op
+  secretary.todo:
+    description: Allow players to add todo items.
+    default: op
+  secretary.remind:
+    description: Allow players to add reminders.
+    default: op
+  secretary.sound:
+    description: Allow players to change the reminder sound.
+    default: op
+  secretary.name:
+    description: Allow players to see a secretaries name.
+    default: op
+commands:
+  secretary:
+    description: Manipulate secretaries with various arguments (create, delete, todo, remind). Type /secretary help - to see more.
+    aliases: sec
+    create:
+      description: Create a secretary.
+      usage: /<command> create [name]
+      permission: secretary.create
+      permission-message: You don't have the permission <permission> to use this command
+    delete:
+      description: Remove a secretary.
+      usage: /<command> delete
+      permission: secretary.delete
+      permission-message: You don't have the permission <permission> to use this command
+    todo:
+      description: Add todo items to a secretary.
+      usage: /<command> todo [add|list|mark|delete] [item|-|id|id]
+      permission: secretary.todo
+      permission-message: You don't have the permission <permission> to use this command
+    remind:
+      description: Add reminders to a secretary.
+      usage: /<command> remind [add|list] [item] [time in minutes]
+      permission: secretary.remind
+      permission-message: You don't have the permission <permission> to use this command
+    repeat:
+      description: Add repeating reminders to a secretary.
+      usage: /<command> repeat [add|set] [item|id] [time in minutes]
+      permission: secretary.remind
+      permission-message: You don't have the permission <permission> to use this command
+    setsound:
+      description: Set the alarm sound for reminders.
+      usage: /<command> setsound [sound effect] eg. GHAST_SHRIEK
+      permission: secretary.sound
+      permission-message: You don't have the permission <permission> to use this command
+    name:
+      description: See a secretary's name.
+      usage: /<command> name
+      permission: secretary.name
+      permission-message: You don't have the permission <permission> to use this command
+    admin:
+      description: Set secretary configuration options.
+      usage: /<command> admin [config option] [value]
+      permission: secretary.admin
+      permission-message: You don't have the permission <permission> to use this command
