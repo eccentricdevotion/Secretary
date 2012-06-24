@@ -39,7 +39,7 @@ public class Constants extends JavaPlugin {
 	public static final String COMMAND_ADMIN = "Arguments\n" + ChatColor.GOLD + "/secretary admin s_limit [x]" + ChatColor.RESET + " - set the number of secretaries allowed per player.\n" + ChatColor.GOLD + "/secretary admin t_limit [x]" + ChatColor.RESET + " - set the number of todo items allowed per secretary.\n" + ChatColor.GOLD + "/secretary admin r_limit [x]" + ChatColor.RESET + " - set the number of reminders allowed per secretary.\n" + ChatColor.GOLD + "/secretary admin use_inv [true|false]" + ChatColor.RESET + " - set whether a player must have the required fences and pressure plates in their inventory. SURVIVAL mode only.\n" + ChatColor.GOLD + "/secretary admin damage [x]" + ChatColor.RESET + " - set the amount of time (in minutes) secretaries take no damage.";
 	public static final String NO_PERMS_MESSAGE = "You do not have permission to do that!";
 	public static final String NOT_OWNER = "That is not your secretary!";
-	public static final String NO_TODOS = "You have not added any Todos yet.";
+	public static final String NO_TODOS = "You have not added any todos yet.";
 	public static final String NO_REMINDS = "You have not added any reminders yet.";
 	public static final String WRONG_MATERIAL = "That is not the correct material to get a list from the secretary!";
 	public static final String CMD_MESSAGE_ON = "Secretary selected, and is at your command!";
