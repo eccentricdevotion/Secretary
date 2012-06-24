@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.eccentric_nz.plugins.secretary</groupId>
     <artifactId>Secretary</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <name>Secretary</name>
     <url>http://www.thenosefairy.co.nz/</url>
     <repositories>

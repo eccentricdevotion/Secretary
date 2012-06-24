@@ -1,12 +1,11 @@
 author: eccentric_nz
-database: false
 description: Add reminders and todos using a villager masquerading as a secretary.
 main: me.eccentric_nz.plugins.secretary.Secretary
 name: Secretary
 startup: postworld
 dev-url: http://dev.bukkit.org/server-mods/secretary/
 url: http://www.thenosefairy.co.nz/
-version: '1.0'
+version: '1.0.1'
 permissions:
   secretary.admin:
     description: Allow players access to the Secretary admin commands.
