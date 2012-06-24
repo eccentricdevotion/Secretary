@@ -217,7 +217,7 @@ public class SecretaryExecutor extends JavaPlugin implements CommandExecutor {
 						Constants.setBlock(world, x, y, minusz, pyaw, 315, 45, "OR");
 						Constants.setBlock(world, plusx, y, minusz, pyaw, 315, 135, "OR");
 
-						thesecretary = player.getWorld().spawnCreature(spawnLoc, et);
+						thesecretary = (LivingEntity) player.getWorld().spawnEntity(spawnLoc, et);
 						// change the villager to a librarian
 						Villager villager = (Villager) thesecretary;
 						villager.setProfession(Villager.Profession.LIBRARIAN);
