@@ -60,7 +60,8 @@ public class SecretaryExecutor extends JavaPlugin implements CommandExecutor {
 				sender.sendMessage(Constants.COMMANDS.split("\n"));
 				return true;
 			}
-			if (!args[0].equals("create") && !args[0].equals("todo") && !args[0].equals("remind") && !args[0].equals("delete") && !args[0].equals("setsound") && !args[0].equals("name") && !args[0].equals("help") && !args[0].equals("admin")) {
+			// the command list - first argument MUST appear here!
+			if (!args[0].equals("create") && !args[0].equals("todo") && !args[0].equals("remind") && !args[0].equals("delete") && !args[0].equals("setsound") && !args[0].equals("name") && !args[0].equals("help") && !args[0].equals("admin") && !args[0].equals("repeat")) {
 				sender.sendMessage("Do you want to create, todo, remind, setsound, view name or delete?");
 				return false;
 			}
@@ -372,23 +373,26 @@ public class SecretaryExecutor extends JavaPlugin implements CommandExecutor {
 							return false;
 						}
 						int i = 1;
+						String tf;
 						Set<String> remindlist = plugin.reminds.getConfigurationSection(configPath).getKeys(false);
 						for (String str : remindlist) {
 							if (i == val) {
 								// toggle repeat status
 								if (plugin.reminds.isSet(configPath + "." + str + ".repeat")) {
 									plugin.reminds.set(configPath + "." + str + ".repeat", null);
+									tf = "FALSE";
 								} else {
 									plugin.reminds.set(configPath + "." + str + ".repeat", Boolean.valueOf("true"));
+									tf = "TRUE";
 								}
-								sender.sendMessage("Item " + i + " deleted.");
+								sender.sendMessage("Reminder " + i + " repeat set to "+tf+".");
 								try {
-									plugin.todos.save(plugin.todofile);
+									plugin.reminds.save(plugin.remindersfile);
 								} catch (IOException e) {
-									sender.sendMessage("There was a problem changing the todo status!");
+									sender.sendMessage("There was a problem changing the repeat status!");
 								}
 								// show the list of todos again
-								Constants.list(plugin.todos, configPath, player, "todos");
+								Constants.list(plugin.reminds, configPath, player, "reminders");
 								break;
 							}
 							i++;

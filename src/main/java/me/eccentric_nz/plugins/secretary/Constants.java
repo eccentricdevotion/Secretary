@@ -26,13 +26,14 @@ public class Constants extends JavaPlugin {
 	public static final String COMMANDS = "Type " + ChatColor.GOLD + "/secretary help <command>" + ChatColor.RESET + " to see more details about a command.\nCommands\n" + ChatColor.GOLD + "/secretary create" + ChatColor.RESET + " - makes a new secretary.\n" + ChatColor.GOLD + "/secretary todo [add|mark|delete|list]" + ChatColor.RESET + " - manipulates todo list\n" + ChatColor.GOLD + "/secretary remind [add|list] - adds and views reminders.\n" + ChatColor.GOLD + "/secretary delete" + ChatColor.RESET + " - remove a secretary.\n" + ChatColor.GOLD + "/secretary setsound" + ChatColor.RESET + " - sets the alarm sound for a secretary.\n" + ChatColor.GOLD + "/secretary name" + ChatColor.RESET + " - view a secretary's name.";
 
 	public enum CMDS {
+
 		CREATE, DELETE, TODO, REMIND, REPEAT, SETSOUND, NAME, ADMIN;
 	}
 	public static final String COMMAND_CREATE = "Look at the block where you want the secretary to stand, then type\nthe command " + ChatColor.GOLD + "/secretary create" + ChatColor.RESET + ".\nIn SURVIVAL mode, you will need 8 fences, and 3 wood pressure plates.";
 	public static final String COMMAND_DELETE = "Select the secretary you want to delete\nby right-clicking it with a FEATHER, then type the command " + ChatColor.GOLD + "/secretary delete" + ChatColor.RESET + ".\n" + ChatColor.RED + "WARNING:" + ChatColor.RESET + " You will lose any todos and reminders that have been set!";
 	public static final String COMMAND_TODO = "Select the secretary you want to add a todo to\nby right-clicking it with a FEATHER\nTo add a todo, type " + ChatColor.GOLD + "/secretary todo add [the thing you need to do]" + ChatColor.RESET + "\nTo list your todos, type " + ChatColor.GOLD + "/secretary todo list" + ChatColor.RESET + " (or right-click with PAPER).\nTo mark a todo as DONE, list the todos to get the todo's number,\nthen type " + ChatColor.GOLD + "/secretary todo mark [x]" + ChatColor.RESET + ", where [x] is a number.\nTo delete a todo, list the todos to get the todo's number,\nthen type " + ChatColor.GOLD + "/secretary todo delete [x]" + ChatColor.RESET + ", where [x] is a number.";
 	public static final String COMMAND_REMIND = "Select the secretary you want to add a reminder to\nby right-clicking it with a FEATHER\nTo add a reminder, type " + ChatColor.GOLD + "/secretary remind add [the thing you need to do] [minutes until alarm]\n" + ChatColor.RESET + "eg. /secretary remind add Get more coal 15\nTo list your reminders, type " + ChatColor.GOLD + "/secretary remind list" + ChatColor.RESET + " (or right-click with an INK_SACK).\nOnce the secretary has jogged your memory, the item will be removed from the reminder list.";
-	public static final String COMMAND_REPEAT = "Select the secretary you want to add a repeating reminder to\nby right-clicking it with a FEATHER\nTo add a repeating reminder, type " + ChatColor.GOLD + "/secretary repeat add [the thing you need to do] [minutes until alarm]\n" + ChatColor.RESET + "eg. /secretary repeat add Harvest wheat crops 45\nTo toggle repeating reminders off of on, first list the reminders to get the reminder's number (or right-click with an INK_SACK),\n type " + ChatColor.GOLD + "/secretary remind set [x]" + ChatColor.RESET + ".\nIf the reminder is already a repeating one, it will be toggled OFF and will be removed after the next alarm.";
+	public static final String COMMAND_REPEAT = "Select the secretary you want to add a repeating reminder to\nby right-clicking it with a FEATHER\nTo add a repeating reminder, type " + ChatColor.GOLD + "/secretary repeat add [the thing you need to do] [minutes until alarm]\n" + ChatColor.RESET + "eg. /secretary repeat add Harvest wheat crops 45\nTo toggle repeating reminders off of on, first list the reminders to get the reminder's number (or right-click with an INK_SACK),\n then type " + ChatColor.GOLD + "/secretary remind set [x]" + ChatColor.RESET + " where [x] is the reminder number.\nIf the reminder is already a repeating one, it will be toggled OFF and will be removed after the next alarm.";
 	public static final String COMMAND_SOUND = "Select the secretary you want to set the reminder sound for\nby right-clicking it with a FEATHER\nTo change the reminder alarm sound,\ntype " + ChatColor.GOLD + "/secretary setsound [sound effect]" + ChatColor.RESET + "\neg. /secretary setsound BLAZE_SHOOT\nYou can choose from: BLAZE_SHOOT, BOW_FIRE, CLICK1, DOOR_TOGGLE, EXTINGUISH, GHAST_SHOOT, GHAST_SHRIEK, STEP_SOUND, ZOMBIE_CHEW_IRON_DOOR, ZOMBIE_CHEW_WOODEN_DOOR, ZOMBIE_DESTROY_DOOR";
 	public static final String COMMAND_NAME = "Select the secretary whose name you want to see\nby right-clicking it with a FEATHER\nTo view the name, type " + ChatColor.GOLD + "/secretary name";
 	public static final String COMMAND_ADMIN = "Arguments\n" + ChatColor.GOLD + "/secretary admin s_limit [x]" + ChatColor.RESET + " - set the number of secretaries allowed per player.\n" + ChatColor.GOLD + "/secretary admin t_limit [x]" + ChatColor.RESET + " - set the number of todo items allowed per secretary.\n" + ChatColor.GOLD + "/secretary admin r_limit [x]" + ChatColor.RESET + " - set the number of reminders allowed per secretary.\n" + ChatColor.GOLD + "/secretary admin use_inv [true|false]" + ChatColor.RESET + " - set whether a player must have the required fences and pressure plates in their inventory.\n" + ChatColor.GOLD + "/secretary admin damage [x]" + ChatColor.RESET + " - set the amount of time (in minutes) secretaries take no damage.";
@@ -63,22 +64,23 @@ public class Constants extends JavaPlugin {
 				int i = 1;
 				p.sendMessage(colour + "Your " + s + ":");
 				for (String str : thelist) {
+					String actualPath = c.getConfigurationSection(configPath + "." + str).getName();
 					if (s.equals("todos")) {
-						int m = c.getInt(configPath + "." + str + ".status");
+						int m = c.getInt(configPath + "." + actualPath + ".status");
 						if (m == 1) {
 							str += " - DONE";
 						}
 					} else {
 						long now = System.currentTimeMillis();
-						long alarm = c.getLong(configPath + "." + str + ".alarm");
+						long alarm = c.getLong(configPath + "." + actualPath + ".alarm");
 						long diff = alarm - now;
 						String remaining = String.format("%d min, %d sec",
 								TimeUnit.MILLISECONDS.toMinutes(diff),
 								TimeUnit.MILLISECONDS.toSeconds(diff)
 								- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff)));
 						str += " - " + remaining + " remaining";
-						if (c.isSet(configPath + "." + str + ".repeat")) {
-							str += " REPEATING";
+						if (c.isSet(configPath + "." + actualPath + ".repeat")) {
+							str += ": REPEATING";
 						}
 					}
 					p.sendMessage(colour + "" + i + ". " + str);
