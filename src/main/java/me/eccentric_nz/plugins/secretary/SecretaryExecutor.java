@@ -482,7 +482,7 @@ public class SecretaryExecutor extends JavaPlugin implements CommandExecutor {
 					}
 				}
 				if (args[0].equals("delete")) {
-					if (player.hasPermission("secretary.todo")) {
+					if (player.hasPermission("secretary.delete")) {
 						if (!plugin.PlayerEntityMap.containsKey(player)) {
 							sender.sendMessage("You need to select the secretary with a " + plugin.config.getString("select_material") + " before you can delete it!");
 							return false;
