@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
@@ -28,7 +26,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Secretary extends JavaPlugin implements Listener {
 
-    private static Logger log;
     public PluginDescriptionFile pdfFile;
     public FileConfiguration config = null;
     public FileConfiguration secrets = null;
@@ -148,7 +145,7 @@ public class Secretary extends JavaPlugin implements Listener {
 
         if (entityType.equals(EntityType.VILLAGER)) {
 
-            ChatColor colour = ChatColor.RESET;
+            ChatColor colour;
 
             if (material.equals(Material.PAPER) || material.equals(Material.INK_SACK) || material.equals(Material.FEATHER)) {
 
@@ -205,16 +202,6 @@ public class Secretary extends JavaPlugin implements Listener {
                 }
                 event.setCancelled(true);
             }
-            /*else {
-                if (getServer().getPluginManager().getPlugin("Profession") != null && (material.equals(Material.WHEAT) || material.equals(Material.RAW_BEEF) || material.equals(Material.BOOK) || material.equals(Material.IRON_INGOT) || material.equals(Material.REDSTONE))) {
-                    if (profession == false) {
-                        System.out.println(Constants.PROFESSION_ENABLED);
-                        profession = true;
-                    }
-                } else {
-                    player.sendMessage(Constants.WRONG_MATERIAL + " You have a " + material + " in our hand!");
-                }
-            }*/
         }
     }
 
@@ -318,7 +305,7 @@ public class Secretary extends JavaPlugin implements Listener {
             out.close();
             in.close();
         } catch (Exception e) {
-            log.log(Level.INFO, "{0} could not save the config file.", Constants.MY_PLUGIN_NAME);
+            System.err.println(Constants.MY_PLUGIN_NAME + " Could not save the config file.");
         }
     }
 
@@ -329,7 +316,7 @@ public class Secretary extends JavaPlugin implements Listener {
         try {
             config.save(myconfigfile);
         } catch (IOException ex) {
-            Logger.getLogger(JavaPlugin.class.getName()).log(Level.SEVERE, "Could not save config to " + myconfigfile, ex);
+            System.err.println(Constants.MY_PLUGIN_NAME + "Could not save config to " + myconfigfile);
         }
     }
 }

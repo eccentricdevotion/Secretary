@@ -5,7 +5,7 @@ name: Secretary
 startup: postworld
 dev-url: http://dev.bukkit.org/server-mods/secretary/
 url: http://www.thenosefairy.co.nz/
-version: '1.0.4'
+version: '1.1.1'
 permissions:
   secretary.admin:
     description: Allow players access to the Secretary admin commands.

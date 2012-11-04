@@ -1,6 +1,0 @@
-## alarm is time-set + minutes specified by command * 60000 (milliseconds)
-dummy_user:
-  Villager UUID:
-    Mine coal for furnace:
-      time-set: 1340267203000
-      alarm: 1340267503000

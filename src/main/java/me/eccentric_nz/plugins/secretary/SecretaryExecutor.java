@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Logger;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -35,7 +34,6 @@ public class SecretaryExecutor extends JavaPlugin implements CommandExecutor {
 	private double secLocY;
 	private double secLocZ;
 	private String secWorld;
-	private static Logger log;
 	private boolean fences = false;
 	private boolean plates = false;
 
@@ -45,7 +43,7 @@ public class SecretaryExecutor extends JavaPlugin implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		// If the player typed /setprof then do the following...
+		// If the player typed /secretary then do the following...
 		// check there is the right number of arguments
 		if (cmd.getName().equalsIgnoreCase("secretary")) {
 			Player player = null;
